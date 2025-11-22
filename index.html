@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,8 +67,13 @@
         }
 
         @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30px, 50px) scale(1.1); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(30px, 50px) scale(1.1);
+            }
         }
 
         .container {
@@ -106,7 +112,7 @@
             line-height: 1;
             margin: 1rem 0 2rem;
             font-variant-numeric: tabular-nums;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .modes {
@@ -135,7 +141,7 @@
         .mode-btn.active {
             background: var(--glass-border);
             color: var(--text-primary);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .controls {
@@ -193,25 +199,180 @@
             transform-origin: left;
             transform: scaleX(0);
             transition: transform 1s linear, background-color 0.3s ease;
-            border-radius: 0 0 24px 24px; /* Clip to container */
+            border-radius: 0 0 24px 24px;
+            /* Clip to container */
         }
-        
-        /* Dynamic Accent Colors */
-        body[data-mode="focus"] .blob-1 { background: var(--accent-focus); }
-        body[data-mode="focus"] .progress-bar { background: var(--accent-focus); }
-        
-        body[data-mode="short"] .blob-1 { background: var(--accent-short); }
-        body[data-mode="short"] .progress-bar { background: var(--accent-short); }
-        
-        body[data-mode="long"] .blob-1 { background: var(--accent-long); }
-        body[data-mode="long"] .progress-bar { background: var(--accent-long); }
 
+        /* Dynamic Accent Colors */
+        body[data-mode="focus"] .blob-1 {
+            background: var(--accent-focus);
+        }
+
+        body[data-mode="focus"] .progress-bar {
+            background: var(--accent-focus);
+        }
+
+        body[data-mode="short"] .blob-1 {
+            background: var(--accent-short);
+        }
+
+        body[data-mode="short"] .progress-bar {
+            background: var(--accent-short);
+        }
+
+        body[data-mode="long"] .blob-1 {
+            background: var(--accent-long);
+        }
+
+        body[data-mode="long"] .progress-bar {
+            background: var(--accent-long);
+        }
+
+        /* Settings Modal */
+        .settings-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-primary);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: #1a1a2e;
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 400px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-focus);
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-focus);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .save-btn:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
+
 <body data-mode="focus">
 
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
+
+    <button class="settings-btn" onclick="toggleSettings()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
+        </svg>
+    </button>
 
     <div class="container">
         <h1>Tomodoro</h1>
@@ -227,11 +388,38 @@
         <div class="controls">
             <button class="btn btn-primary" id="mainBtn" onclick="toggleTimer()">START</button>
             <button class="btn btn-secondary" onclick="resetTimer()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"></path><path d="M3 3v9h9"></path></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"></path>
+                    <path d="M3 3v9h9"></path>
+                </svg>
             </button>
         </div>
 
         <div class="progress-bar" id="progress"></div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-btn" onclick="toggleSettings()">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Focus Duration (minutes)</label>
+                <input type="number" id="focusTime" value="25" min="1" max="60">
+            </div>
+            <div class="form-group">
+                <label>Short Break (minutes)</label>
+                <input type="number" id="shortTime" value="5" min="1" max="30">
+            </div>
+            <div class="form-group">
+                <label>Long Break (minutes)</label>
+                <input type="number" id="longTime" value="15" min="1" max="60">
+            </div>
+            <button class="save-btn" onclick="saveSettings()">Save Settings</button>
+        </div>
     </div>
 
     <script>
@@ -241,7 +429,7 @@
         let isRunning = false;
         let currentMode = 'focus';
 
-        const modes = {
+        let modes = {
             focus: 25 * 60,
             short: 5 * 60,
             long: 15 * 60
@@ -251,15 +439,16 @@
         const mainBtn = document.getElementById('mainBtn');
         const progressBar = document.getElementById('progress');
         const modeBtns = document.querySelectorAll('.mode-btn');
+        const settingsModal = document.getElementById('settingsModal');
 
         function updateDisplay() {
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
             const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
+
             timerDisplay.textContent = timeString;
             document.title = `${timeString} - Tomodoro`;
-            
+
             // Update progress bar
             const progress = 1 - (timeLeft / totalTime);
             progressBar.style.transform = `scaleX(${progress})`;
@@ -275,11 +464,11 @@
 
         function startTimer() {
             if (isRunning) return;
-            
+
             isRunning = true;
             mainBtn.textContent = 'PAUSE';
             mainBtn.style.opacity = '0.9';
-            
+
             timerId = setInterval(() => {
                 if (timeLeft > 0) {
                     timeLeft--;
@@ -292,7 +481,7 @@
 
         function pauseTimer() {
             if (!isRunning) return;
-            
+
             isRunning = false;
             mainBtn.textContent = 'RESUME';
             clearInterval(timerId);
@@ -309,12 +498,12 @@
 
         function setMode(mode) {
             currentMode = mode;
-            
+
             // Update UI
             document.body.setAttribute('data-mode', mode);
             modeBtns.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
+
             // Reset timer to new mode
             resetTimer();
         }
@@ -334,14 +523,14 @@
                     const ctx = new AudioContext();
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
-                    
+
                     osc.connect(gain);
                     gain.connect(ctx.destination);
-                    
+
                     osc.type = 'sine';
                     osc.frequency.setValueAtTime(880, ctx.currentTime); // A5
                     gain.gain.setValueAtTime(0.1, ctx.currentTime);
-                    
+
                     osc.start();
                     gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.5);
                     osc.stop(ctx.currentTime + 0.5);
@@ -351,8 +540,34 @@
             }
         }
 
+        // Settings Functions
+        function toggleSettings() {
+            settingsModal.classList.toggle('open');
+        }
+
+        function saveSettings() {
+            const focusVal = parseInt(document.getElementById('focusTime').value);
+            const shortVal = parseInt(document.getElementById('shortTime').value);
+            const longVal = parseInt(document.getElementById('longTime').value);
+
+            if (focusVal > 0) modes.focus = focusVal * 60;
+            if (shortVal > 0) modes.short = shortVal * 60;
+            if (longVal > 0) modes.long = longVal * 60;
+
+            toggleSettings();
+            resetTimer();
+        }
+
+        // Close modal when clicking outside
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) {
+                toggleSettings();
+            }
+        });
+
         // Initialize
         updateDisplay();
     </script>
 </body>
+
 </html>
